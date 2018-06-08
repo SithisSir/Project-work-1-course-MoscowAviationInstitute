@@ -12,26 +12,6 @@ namespace Proektka
         public static double[][] mass = new double[N][];
         public static int N, M;
         public static double mathexpectation1, mathexpectation2, correlfunction;
-        static void ReadFromFile(string path)
-        {
-            FileStream File = new FileStream(path, FileMode.Open); //открытие файла на чтение
-            StreamReader reader = new StreamReader(File);
-            N = Convert.ToInt32(reader.ReadLine());
-            M = Convert.ToInt32(reader.ReadLine());
-            Array.Resize<double[]>(ref mass, M);
-            for (int i = 0; i < M; i++)
-            {
-                Array.Resize(ref mass[i], N);
-            }
-            for (int i = 0; i < M; i++)
-            {
-                for (int j = 0; j < N; j++)
-                {
-                    mass[i][j] = Convert.ToDouble(reader.ReadLine());
-                }
-            }
-            reader.Close();
-        }
         public static void Randomgen(int A, int B)
         {
             Random rand1 = new Random();
@@ -47,21 +27,6 @@ namespace Proektka
                     mass[i][j] = rand1.NextDouble() * (B-A) + A;
                 }
             }
-        }
-        static void WriteToFile(string path)
-        {
-            FileStream File = new FileStream(path, FileMode.CreateNew); //создание нового файла
-            StreamWriter writer = new StreamWriter(File);
-            writer.WriteLine(N);
-            writer.WriteLine(M);
-            for (int i = 0; i < M; i++)
-            {
-                for (int j = 0; j < N; j++)
-                {
-                    writer.WriteLine(mass[i][j]);
-                }
-            }
-            writer.Close();
         }
         static double mathexpectation(int number)
         {
