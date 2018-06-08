@@ -16,8 +16,8 @@ namespace Proektka
         {
             FileStream File = new FileStream(path, FileMode.Open); //открытие файла на чтение
             StreamReader reader = new StreamReader(File);
-            N = Convert.ToInt32(reader.ReadLine());
-            M = Convert.ToInt32(reader.ReadLine());
+            N = Int32.Parse(reader.ReadLine());
+            M = Int32.Parse(reader.ReadLine());
             Array.Resize<double[]>(ref mass, M);
             for (int i = 0; i < M; i++)
             {
@@ -110,12 +110,12 @@ namespace Proektka
                     Console.WriteLine("Введите путь к файлу для чтения");
                     string path = Console.ReadLine();
                     ReadFromFile(path);
-                    Console.WriteLine("{0}, {0}", N, M);
+                    Console.WriteLine("{0}, {1}", N, M);
                     for (int i = 0; i < M; i++)
                     {
                         for (int j = 0; j < N; j++)
                         {
-                            Console.Write(mass[i][j]);
+                            Console.Write("{0} ", mass[i][j]);
                         }
                         Console.WriteLine();
                     }
