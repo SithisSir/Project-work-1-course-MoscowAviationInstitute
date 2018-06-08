@@ -72,8 +72,8 @@ namespace Proektka
             mathexpectation1 = mathexpectation(n1);
             mathexpectation2 = mathexpectation(n2);
             correlfunction= correlationfuntion(n1, n2);
-            Console.WriteLine("{0}, {1}", mathexpectation1, mathexpectation2);
-            Console.WriteLine(correlfunction);
+            Console.WriteLine("{0} - мат. ожидание 1-го элемента, {1} -мат. ожидание 2-го", mathexpectation1, mathexpectation2);
+            Console.WriteLine("{0} - корреляционная функция 2-х элементов", correlfunction);
             Console.ReadLine();
         }
     }
