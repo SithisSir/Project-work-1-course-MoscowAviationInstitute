@@ -9,11 +9,12 @@ namespace Proektka
 {
     class Program
     {
-        static double[][] mass = new double[N][];
+        public static double[][] mass = new double[N][];
         public static int N, M;
+        public static double mathexpectation1, mathexpectation2, correlfunction;
         static void ReadFromFile(string path)
         {
-            FileStream File = new FileStream(path, FileMode.Open); //создание нового файла
+            FileStream File = new FileStream(path, FileMode.Open); //открытие файла на чтение
             StreamReader reader = new StreamReader(File);
             N = Convert.ToInt32(reader.ReadLine());
             M = Convert.ToInt32(reader.ReadLine());
@@ -43,7 +44,7 @@ namespace Proektka
             {
                 for (int j = 0; j < N; j++)
                 {
-                    mass[i][j] = rand1.NextDouble() * (B-A) - A;
+                    mass[i][j] = rand1.NextDouble() * (B-A) + A;
                 }
             }
         }
@@ -62,6 +63,26 @@ namespace Proektka
             }
             writer.Close();
         }
+        static double mathexpectation(int number)
+        {
+            double mathexpect = 0;
+            for (int i = 0; i<N; i++)
+            {
+                mathexpect += mass[number][i];
+            }
+            mathexpect = mathexpect / M;
+            return mathexpect;
+        }
+        static double correlationfuntion(int number1, int number2)
+        {
+            double cor = 0;
+            for (int i = 0; i < N; i++)
+            {
+                cor += (mass[number1][i] - mathexpectation1) * (mass[number2][i] - mathexpectation2);
+            }
+            cor = cor / (M-1);
+            return cor;
+        }
         static void Main(string[] args)
         {
             Console.WriteLine("Введите способ задания входных данных\n1 - Случайная генерация, 2 - чтение из файла, 3 - случ. ген. и запись в файл");
@@ -69,7 +90,7 @@ namespace Proektka
             switch (a)
             {
                 case 1:
-                    Console.WriteLine("Введите четыре переменных (кажд. в отд. строку):\nКоличество элементов в диск. процессе, верхняя, нижняя границы значений, количество повторений процесса");
+                    Console.WriteLine("Введите четыре переменных (кажд. в отд. строку):\nКоличество элементов в диск. процессе, количество повторений процесса, нижняя, верхняя границы значений");
                     int CA, B;
                     N = Convert.ToInt32(Console.ReadLine());
                     M = Convert.ToInt32(Console.ReadLine());
@@ -80,13 +101,13 @@ namespace Proektka
                     {
                         for (int j = 0; j < N; j++)
                         {
-                            Console.Write(mass[i][j]);
+                            Console.Write("{0}\t", mass[i][j]);
                         }
                         Console.WriteLine();
                     }
                     break;
                 case 2:
-                    Console.WriteLine("Введите путь к файлу ебать мой лысый хуй");
+                    Console.WriteLine("Введите путь к файлу для чтения");
                     string path = Console.ReadLine();
                     ReadFromFile(path);
                     Console.WriteLine("{0}, {0}", N, M);
@@ -100,8 +121,7 @@ namespace Proektka
                     }
                     break;
                 case 3:
-                    //string path;
-                    Console.WriteLine("Введите четыре переменных (кажд. в отд. строку):\nКоличество элементов в диск. процессе, верхняя, нижняя границы значений, количество повторений процесса");
+                    Console.WriteLine("Введите четыре переменных (кажд. в отд. строку):\nКоличество элементов в диск. процессе, количество повторений процесса, нижняя, верхняя границы значений");
                     N = Convert.ToInt32(Console.ReadLine());
                     M = Convert.ToInt32(Console.ReadLine());
                     CA = Convert.ToInt32(Console.ReadLine());
@@ -115,11 +135,20 @@ namespace Proektka
                         }
                         Console.WriteLine();
                     }
-                    Console.WriteLine("Введите путь к файлу ебать мой лысый хуй");
+                    Console.WriteLine("Введите путь к файлу для сохранения");
                     path = Console.ReadLine();
                     WriteToFile(path);
                     break;
             }
+            Console.WriteLine("Массив сгенерирован. Введите номера элементов, для которых считать корелляционную функцию");
+            int n1, n2;
+            n1 = Convert.ToInt32(Console.ReadLine());
+            n2 = Convert.ToInt32(Console.ReadLine());
+            mathexpectation1 = mathexpectation(n1);
+            mathexpectation2 = mathexpectation(n2);
+            correlfunction= correlationfuntion(n1, n2);
+            Console.WriteLine("{0}, {1}", mathexpectation1, mathexpectation2);
+            Console.WriteLine(correlfunction);
             Console.ReadLine();
         }
     }
