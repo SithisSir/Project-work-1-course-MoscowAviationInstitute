@@ -85,61 +85,21 @@ namespace Proektka
         }
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите способ задания входных данных\n1 - Случайная генерация, 2 - чтение из файла, 3 - случ. ген. и запись в файл");
-            int a = Convert.ToInt32(Console.ReadLine());
-            switch (a)
-            {
-                case 1:
-                    Console.WriteLine("Введите четыре переменных (кажд. в отд. строку):\nКоличество элементов в диск. процессе, количество повторений процесса, нижняя, верхняя границы значений");
-                    int CA, B;
-                    N = Convert.ToInt32(Console.ReadLine());
-                    M = Convert.ToInt32(Console.ReadLine());
-                    CA = Convert.ToInt32(Console.ReadLine());
-                    B = Convert.ToInt32(Console.ReadLine());
-                    Randomgen(CA, B);
-                    for (int i = 0; i < M; i++)
+             Console.WriteLine("Введите четыре переменных (кажд. в отд. строку):\nКоличество элементов в диск. процессе, количество повторений процесса, нижняя, верхняя границы значений");
+             int A, B;
+             N = Convert.ToInt32(Console.ReadLine());
+             M = Convert.ToInt32(Console.ReadLine());
+             A = Convert.ToInt32(Console.ReadLine());
+             B = Convert.ToInt32(Console.ReadLine());
+             Randomgen(A, B);
+             for (int i = 0; i < M; i++)
+             {
+                for (int j = 0; j < N; j++)
                     {
-                        for (int j = 0; j < N; j++)
-                        {
-                            Console.Write("{0}\t", mass[i][j]);
-                        }
-                        Console.WriteLine();
+                        Console.Write("{0}\t", mass[i][j]);
                     }
-                    break;
-                case 2:
-                    Console.WriteLine("Введите путь к файлу для чтения");
-                    string path = Console.ReadLine();
-                    ReadFromFile(path);
-                    Console.WriteLine("{0}, {0}", N, M);
-                    for (int i = 0; i < M; i++)
-                    {
-                        for (int j = 0; j < N; j++)
-                        {
-                            Console.Write(mass[i][j]);
-                        }
-                        Console.WriteLine();
-                    }
-                    break;
-                case 3:
-                    Console.WriteLine("Введите четыре переменных (кажд. в отд. строку):\nКоличество элементов в диск. процессе, количество повторений процесса, нижняя, верхняя границы значений");
-                    N = Convert.ToInt32(Console.ReadLine());
-                    M = Convert.ToInt32(Console.ReadLine());
-                    CA = Convert.ToInt32(Console.ReadLine());
-                    B = Convert.ToInt32(Console.ReadLine());
-                    Randomgen(CA, B);
-                    for (int i = 0; i < M; i++)
-                    {
-                        for (int j = 0; j < N; j++)
-                        {
-                            Console.Write(mass[i][j]);
-                        }
-                        Console.WriteLine();
-                    }
-                    Console.WriteLine("Введите путь к файлу для сохранения");
-                    path = Console.ReadLine();
-                    WriteToFile(path);
-                    break;
-            }
+                    Console.WriteLine();
+             }
             Console.WriteLine("Массив сгенерирован. Введите номера элементов, для которых считать корелляционную функцию");
             int n1, n2;
             n1 = Convert.ToInt32(Console.ReadLine());
